@@ -1,0 +1,55 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'core/image/favicon/favicon-32x32.png'%}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'core/image/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'core/image/favicon/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static 'core/image/favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    
+    <!-- jQuery CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="{% static 'core/css/fontawesome.min.css' %}">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'user/css/style.css' %}">
+    
+    {% block extra_head %}{% endblock %}
+
+    <title>Insta Clone</title>
+  </head>
+  <body style="background-color: #fafafa;">
+
+    {% include 'components/navbar1.html' %}
+
+    <section>
+      {% block content %}{% endblock %}
+    </section>
+    
+    <!-- jQuery script -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    
+    <!-- bootstrap script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    
+    <!-- font-awesome script -->
+    <script src="{% static 'authen/js/font.awesome.min.js' %}"></script>
+    
+    <!-- My Style script -->
+    <script src="{% static 'core/js/myscript.js' %}" type="text/javascript" charset="utf-8"></script>
+    
+    {% block extra_body %}{% endblock %}
+
+  </body>
+</html>

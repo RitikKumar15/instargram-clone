@@ -1,0 +1,47 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="{{ message.tags }}" role="alert" style="font-size: 13px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    <!-- User Feed Starts Here-->
+    <div class="container my-4">
+      {% if feed %}
+      {% for f in feed %}
+      <div class="row mx-5 my-5 shadow">
+        
+        <a href="{% url 'profile' f.user.username %}" class="text-decoration-none" style="color:black"><div class="col-sm-12 my-1">
+          {% if f.user.picture %}
+            <img class="rounded-circle z-depth-0" style="height:60px; width:60px" src="{{f.user.picture.url}}" alt="" />
+          {% else %}
+            <img class="rounded-circle z-depth-0" src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png" style="height:60px; width:60px" alt="" />
+          {% endif %}
+          
+          <span class="fw-bold h5 my-1 mx-1">{{f.user.username}}</span>
+        <hr />
+        </div></a>
+        <div class="col-sm-12">
+          <img class="img-fluid img-thumnail z-depth-0" style="position:relative; left:0; width:100%;" src="{{f.image.url}}" alt="" />
+        </div>
+        <a class="btn border border-warning" style="color:blue" href="{% url 'postdetails' f.id %}">
+          Check Here To See Complete Details
+        </a>
+      </div>
+      {% endfor %}
+      {% else %}
+       <div class="row">
+         <div class="col-sm-12 col-12">
+           <br>
+           <p class="text-center my-5 h5">No Feed posts Yet Follow Your Friends.</p>
+           <br>
+         </div>
+       </div>
+      {% endif %}
+    </div>
+ {% endblock %}

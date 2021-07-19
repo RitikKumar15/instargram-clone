@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="{{ message.tags }}" role="alert" style="font-size: 13px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    <!-- User Feed Starts Here-->
+    <div class="container my-4">
+      {% for f in feed %}
+      <div class="row mx-5 my-5 shadow">
+        
+        <div class="col-sm-12 my-1">
+          <img class="rounded-circle z-depth-0" style="height:60px; width:60px" src="{{f.user.picture.url}}" alt="" />
+          <span class="fw-bold h5">{{f.user.username}}</span>
+        <hr />
+        </div>
+        
+        <div class="col-sm-12">
+          <img class="img-fluid img-thumnail z-depth-0" style="position:relative; left:0; width:100%" src="{{f.image.url}}" alt="" />
+        </div>
+        
+        <div class="col-sm-12 my-2">
+          <span class="h3 px-1" style="color:red"><i class="far fa-heart fa-lg"></i></span>
+          <span class="h4 px-1" style="color:blue"><i class="far fa-comment-alt fa-lg"></i></span>
+          <span class="h4 px-1"><i class="fas fa-location-arrow fa-lg"></i></span>
+        </div>
+        <div class="col-sm-12">
+          <div class="px-1">
+            <small class="h6">197 likes</small>
+          </div>
+        <hr />
+        </div>
+        
+        <div class="row my-2">
+          <div class="col-sm-2">
+            <img class="rounded-circle z-depth-0" style="height:50px; width:50px" src="{{f.user.picture.url}}" alt="" />
+          </div>
+          <div class="col-sm-10">
+            <span class="fw-bold h5">{{f.user.username}}</span>
+            <span>This is the comments type by other user on my post</span>
+            <div style="margin-top:5px"><small class="h6">6d</small><small class="px-3 h6">197 likes</small></div>
+        </div>
+      </div>
+      
+      <div class="row my-2">
+        <div class="col-sm-2">
+          <img class="rounded-circle z-depth-0" style="height:50px; width:50px" src="{{f.user.picture.url}}" alt="" />
+        </div>
+        <div class="col-sm-10">
+          <span class="fw-bold h5">{{f.user.username}}</span>
+          <span>This is the comments type by other user on my post</span>
+          <div style="margin-top:5px"><small class="h6">6d</small><small class="px-3 h6">197 likes</small></div>
+        </div>
+      </div>
+      
+      <div class="row my-3">
+        <div class="col-sm-2">
+           <span class="h1 px-1"><i class="far fa-smile"></i></span>
+        </div>
+        <div class="col-sm-8 my-1">
+          <form class="form-group" action="" method="post" accept-charset="utf-8">
+            {% csrf_token %}
+            <input type="text" placeholder="Add a comment..." class="form-control" name="comment" value="" />
+        </div>
+        <div class="col-sm-2 my-2">
+          <input type="submit" class="btn btn-success btn-sm" value="Post" />
+        </div>
+        </form>
+      </div>
+      
+        
+        
+      </div>
+      {% endfor %}
+    </div>
+  
+{% endblock %}

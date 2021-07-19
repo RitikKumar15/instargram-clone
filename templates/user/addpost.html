@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+ <div class="container my-4">
+   <h1 class="alert alert-warning"><center><i>Add Posts</i></center></h1>
+   <form class="form-group shadow border" action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+     {% csrf_token %}
+     {% for field in form %}
+      <div class="my-1 mx-1">
+        {{field.label_tag}} {{field}}
+      </div>
+     {% endfor %}
+   <input type="submit" class="btn btn-success btn-sm px-4 mx-1 my-1" value="Post" />
+   </form>
+ </div>
+{% endblock content %}

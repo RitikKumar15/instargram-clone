@@ -1,0 +1,99 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'user/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container pt-5">
+      {% if messages %}
+       {% for msg in messages %}
+         <div class="alert alert-success">
+           {{msg}}
+         </div>
+       {% endfor %}
+      {% endif %}
+      <div class="row">
+        
+        <div class="col-sm-4 pb-3">
+          {% if request.user.picture %}
+             <img src="{{ request.user.picture.url }}" class="rounded-circle z-depth-0" style="height:200px; width:200px"/>
+          {% else %}
+            <img src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png" class="rounded-circle z-depth-0" style="height:200px; width:200px" />
+          {% endif %}
+        </div>
+        <div class="col-sm-7 offset-sm-1" >
+          
+          <div class="row ">
+            
+            <div class="col-sm-12 d-flex flex-row">
+              <span><h2>{{request.user.username}}</h2></span>
+              <span class="px-3 mt-1"><a href="{% url 'profile_edit' request.user.username %}" class="fw-bold btn border-dark">Edit Profile</a></span>
+              <span class="px-2 mt-2 h2"><a href="{% url 'profile_edit' request.user.username %}" style="color:black"><i class="fas fa-cog fa-lg "></i></a></span>
+            </div>
+            
+          </div>
+          <div class="row my-4">
+            
+            <div class="col-sm-3 d-flex flex-row">
+              <big><b class="px-1">{{post_count}}</b>Posts</big>
+            </div>
+            <div class="col-sm-4 d-flex flex-row">
+              <big><b class="px-1">{{following_count}}</b>Followers</big>
+            </div>
+            <div class="col-sm-5 d-flex flex-row">
+              <big><b class="px-1">{{follow_count}}</b>following</big>
+            </div>
+          </div>
+          <div class="row mt-2">
+          
+            <div class="col-sm-12 d-flex flex-row">
+              <!--<h4>ऋतिक कुमार</h4>-->
+              <h4>{{request.user.first_name}} {{request.user.last_name}}</h4>
+            </div>
+         </div>
+       </div>
+      </div>
+    </div>
+      <br />
+      <div class="container-fluid">
+        
+      <div class="row mt-4">
+        <div class="col-sm-12">
+         <nav>
+           <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+           <a class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true" style="color:black"><i class="fas fa-camera fa-lg px-1"></i>Home</a>
+           <a class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" style="color:black"><i class="fas fa-border-all fa-lg px-1"></i>Add</a>
+           <a class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" style="color:black"><i class="fas fa-bookmark fa-lg px-1"></i>Save</a>
+         </div>
+       </nav>
+       <div class="tab-content" id="nav-tabContent">
+         <div class="tab-pane fade show active" style="padding-left: 8vmin;" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            {% if curr_user_posts %}
+              {% for post in curr_user_posts %}
+              <a href="{% url 'postdetails' post.id %}"><img class="px-1 py-2" src="{{post.image.url}}" width="335rem" height="335rem" alt="" /></a>
+              {% endfor %}
+              {% else %}
+                <div class="row tab-pane fade show my-4 fw-bold h2" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" style="display:flex; justify-content:center; align-items:center; position:relative; top:calc(100% - 50%)">No Posts Yet</div>
+              {% endif %}
+            </div>
+         
+           <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"><div class="container d-flex justify-content-center my-4"><a href="{% url 'userposts' %}"><img class="rounded-circle z-depth-0" src="{% static 'user/image/add.webp' %}" alt="" width="200px" height="200px"/></a></div><div class="h1"><center>Click On The Plus Icon To Add A Post</center></div>
+          </div>
+          <div class="tab-pane fade" id="nav-contact" style="padding-left: 8vw;" role="tabpanel" aria-labelledby="nav-contact-tab">
+            {% if savedposts %}
+            {% for sp in savedposts %}
+            <a href="{% url 'postdetails' sp.post.id %}"><img class="px-1 py-2" src="{{sp.post.image.url}}" width="300px" height="300px" alt="" /></a>
+            {% endfor %}
+            {% else %}
+            <div class="h3 my-5"><center>No Saved Posts Yet</center></div>
+          </div>
+         {% endif %}
+        </div>
+      </div>
+       
+    </div>
+  </div>
+</div>
+{% endblock %}

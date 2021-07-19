@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/user/all_profiles.css' %}">
+{% endblock %}
+
+{% block content %}
+ <div class="container border">
+ <div class="row my-3">
+   <div class="col-sm-2 col-5">
+     {% if all_profiles %}
+       {% for user in all_profiles %}
+         <!-- User's Profile Picture -->
+         {% if user.picture %}
+           <a href="{% url 'search_details' user.id %}"><img src="{{ user.picture.url }}" class="rounded-circle z-depth-0 mx-4" style="height: 100px;width: 100px"></a>
+         {% else %}
+           <a href="{% url 'search_details' user.id %}"><img src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png"  class="rounded-circle z-depth-0 mx-5" style="height: 100px;width: 100px"></a>
+         {% endif %}
+       {% endfor %}
+     {% endif %}
+    </div>
+    {% if all_profiles %}
+    {% for user in all_profiles %}
+    <div class="col-sm-9 offset-sm-1 col-5 px-1">
+      <div class="row mt-3">
+        <span class="h3">{{user.username}}</span>
+      </div>
+      <div class="row mb-1">
+        <div class="col-sm-12 col-6">
+          <span>{{user.first_name}} {{user.last_name}}</span>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+  
+  
+  {% if all_profiles %}
+  {% else %}
+    <p class="fw-bold d-flex justify-content-center">No Results Found.</p>
+  {% endif %}
+  
+  </div>
+  </div>
+{% endblock %}

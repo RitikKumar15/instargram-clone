@@ -1,0 +1,96 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'user/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container pt-5">
+      <div class="row">
+        
+        <div class="col-sm-4 pb-3">
+          {% if user.picture %}
+          <img class="rounded-circle z-depth-0" src="{{user.picture.url}}" width="220px" height="220px" alt="" />
+          {% else %}
+            <img class="img-fluid img-thumnail rounded-circle" src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png" width="200rem" height="auto" alt="" />
+          {% endif %}
+        </div>
+        <div class="col-sm-7 offset-sm-1" >
+          
+          <div class="row">
+            
+            <div class="col-sm-12 d-flex flex-row">
+              <span><h2>{{user.username}}</h2></span>
+             <!-- <span class="px-3 mt-1"><button href="#" class="fw-bold btn btn-primary">Follow</button></span> -->
+              {% if is_follow %}
+              <span class="px-3 mt-1"><button href="#" class="fw-bold btn btn-dark">Followed</button></span>
+              <div class="btn-group">
+                <button class="btn border-dark btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-check"></i>
+               </button>
+               <ul class="dropdown-menu">
+                  <li class="fw-bold"><a href="{% url 'unfollow' user.id %}" class="text-decoration-none fw-bold" style="color:black">Unfollow</a></li>
+               </ul>
+             </div>
+              <!-- <span class="mt-1 h2"><button class="fw-bold btn border-dark"><i class="fas fa-user-check"></i></button></span> -->
+              
+              <span class="px-3 mt-2 h3">•••</span>
+            {% else %}
+              <span class="px-3 mt-1"><a href="{% url 'follow' user.id %}" class="fw-bold btn btn-primary">Follow</a></span>
+            {% endif %}
+            </div>
+            
+          </div>
+          <div class="row my-4">
+            
+            <div class="col-sm-3 d-flex flex-row">
+              <big><b class="px-1">{{post_count}}</b>posts</big>
+            </div>
+            <div class="col-sm-4 d-flex flex-row">
+              <big><b class="px-1">{{following_count}}</b>followers</big>
+            </div>
+            <div class="col-sm-5 d-flex flex-row">
+              <big><b class="px-1">{{follow_count}}</b>following</big>
+            </div>
+          </div>
+          <div class="row mt-2">
+          
+            <div class="col-sm-12 d-flex flex-row">
+              <!--<h4>ऋतिक कुमार</h4>-->
+              <h4>{{user.first_name}} {{user.last_name}}</h4>
+            </div>
+         </div>
+       </div>
+      </div>
+    </div>
+      <br />
+      <div class="container-fluid">
+        
+      <div class="row mt-4">
+        <div class="col-sm-12">
+          <nav>
+           <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+           <a class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true" style="color:black"><i class="fas fa-home fa-lg px-1"></i>Posts</a>
+         </div>
+       </nav>
+       <div class="tab-content" id="nav-tabContent">
+         <div class="tab-pane fade show active" style="padding-left: 8vw;" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            {% if anon_user_posts %}
+              {% for post in anon_user_posts %}
+              <a href="{% url 'postdetails' post.id %}"><img class="px-1 py-2" src="{{post.image.url}}" width="300px" height="300px" alt="" /></a>
+              {% endfor %}
+            </div>
+              {% else %}
+                <div class="row my-4 fw-bold h2" style="display:flex; justify-content:center; align-items:center; position:relative; top:calc(100% - 50%)">No Posts Yet</div>
+              {% endif %}
+         </div>
+         
+         
+          
+          
+        </div>
+      </div>
+      </div>
+    
+  {% endblock %}

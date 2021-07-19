@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+ <div class="container-fluid my-4">
+   <h1 class="alert-primary text-center"><u>Your Liked Posts</u></h1>
+   <div class="card-group">
+      {% if liked %}
+        {% for l in liked %}
+          <div class="card img">
+            <a href="{% url 'postdetails' l.post.id %}"><img src="{{l.post.image.url}}" class="card-img-top img" alt="..."></a>
+          </div>
+        {% endfor %}
+      {% else %}
+          <div class="m-auto py-5">You Have Not Like Any Post Yet.</div>
+      {% endif %}
+      
+   </div>
+ </div>
+{% endblock content %}

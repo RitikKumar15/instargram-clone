@@ -14,6 +14,9 @@ class UserFeedView(View):
         for sublist in feed:
           for elem in sublist:
             flated_feed.append(elem)
-      return render(request, 'core/tryfeed.html', {"feed": set(flated_feed)})
+        remove_duplicates = set(flated_feed)
+        final_feed = list(remove_duplicates)
+        random.shuffle(final_feed)
+      return render(request, 'core/tryfeed.html', {"feed": final_feed})
     else:
       return redirect('login')
